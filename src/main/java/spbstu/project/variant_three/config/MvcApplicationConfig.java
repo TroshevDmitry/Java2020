@@ -54,12 +54,12 @@ public class MvcApplicationConfig extends WebSecurityConfigurerAdapter {
 
 
 
-    addAdmin();
+    addPAPA("PAPA");
 
-    addDefaultUser();
+    addStudent("Student");
 
-    System.err.println("USERNAME: user PASSWORD: 123");
-    System.err.println("USERNAME: admin PASSWORD: 123");
+    System.err.println("USERNAME: student PASSWORD: asd");
+    System.err.println("USERNAME: PAPA PASSWORD: 123 (ADMIN)");
 
     provider.setPasswordEncoder(passwordEncoder);
     provider.setUserDetailsService(userService);
@@ -67,20 +67,20 @@ public class MvcApplicationConfig extends WebSecurityConfigurerAdapter {
     return provider;
   }
 
-  private User addDefaultUser() {
+  private User addStudent(String name) {
     final User user = new User();
 
-    user.setUsername("user");
-    user.setPassword(passwordEncoder.encode("123"));
+    user.setUsername(name);
+    user.setPassword(passwordEncoder.encode("asd"));
     user.setRoles(Set.of("USER"));
 
     return userService.save(user);
   }
 
-  private User addAdmin() {
+  private User addPAPA(String name) {
     final User admin = new User();
 
-    admin.setUsername("admin");
+    admin.setUsername(name);
     admin.setPassword(passwordEncoder.encode("123"));
     admin.setRoles(Set.of("ADMIN"));
 
